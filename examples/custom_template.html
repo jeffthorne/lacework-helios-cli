@@ -22,6 +22,7 @@
         .info{background-color: #02AEEF;}
         .fixable{background-color: green;}
         .tile{width: 30px; color: white; border-radius: 5px; text-align: center;}
+        .failed{color: red}
 
     </style>
 
@@ -36,6 +37,14 @@
             <h1 style="margin-top: 23px; font-size: 30px;">{{ data['image']['image_info']['repository']}}:{{ data['image']['image_info']['tags'][0] }}</h1>
             Registry:  {{ data['image']['image_info']['registry']}}<br/>
             Scan Time:  {{ data['last_evaluation_time']}}
+
+             {% if result != None %}
+                <div style="font-size: 18px; font-weight: bold;">Scan Result: <span class="{{result['result']}}">{{ result['result']}}</span><br/>Reason:</div>
+
+                {% for r in result['reason']%}
+                    <div>{{r}}</div>
+                {% endfor %}
+            {% endif %}
 
         </div> <!-- end col -->
     </div><!-- end row -->

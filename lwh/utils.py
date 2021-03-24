@@ -1,5 +1,6 @@
-
+import sys
 from lwh.report.report import template_string
+
 
 
 def get_template(template_arg: str):

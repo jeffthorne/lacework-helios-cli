@@ -1,4 +1,29 @@
+import os
+import json
+from jinja2 import Environment, BaseLoader
 
+
+def generate_report(input:str, output:str, template:str, result:dict = None):
+    output_file = f"{os.getcwd()}/helios_report.html" if output == "." else output
+    report_template = get_template(template)
+    html_report = ""
+    with open(input) as f:
+        data = f.read()
+        report_template = Environment(loader=BaseLoader).from_string(report_template)
+        html_report = report_template.render(data=json.loads(data), scan_result_json=data, result=result)
+
+    with open(output_file, "w") as report:
+        report.write(html_report)
+
+
+
+def get_template(template_arg: str):
+
+    if template_arg is None:
+        return template_string
+    else:
+        with open(template_arg, 'r') as file:
+            return file.read()
 
 
 template_string: str = """
@@ -26,6 +51,7 @@ template_string: str = """
         .info{background-color: #02AEEF;}
         .fixable{background-color: green;}
         .tile{width: 30px; color: white; border-radius: 5px; text-align: center;}
+        .failed{color: red}
 
     </style>
    
@@ -39,8 +65,16 @@ template_string: str = """
             <div style="display: inline-block; float: right;margin-top:-20px;margin-right: -20px;"><img src="https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg" width="350px" height="150px"></div>
             <h1 style="margin-top: 23px; font-size: 30px;">{{ data['image']['image_info']['repository']}}:{{ data['image']['image_info']['tags'][0] }}</h1>
             Registry:  {{ data['image']['image_info']['registry']}}<br/>
-            Scan Time:  {{ data['last_evaluation_time']}}
-
+            Scan Time:  {{ data['last_evaluation_time']}}<br/><br/>
+        
+        {% if result != None %}
+        <div style="font-size: 18px; font-weight: bold;">Scan Result: <span class="{{result['result']}}">{{ result['result']}}</span><br/>Reason:</div>
+        
+            {% for r in result['reason']%}
+            <div>{{r}}</div>
+            {% endfor %}
+        {% endif %}
+        
         </div> <!-- end col -->
     </div><!-- end row -->
 
