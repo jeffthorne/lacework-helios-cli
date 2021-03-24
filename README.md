@@ -18,11 +18,11 @@ lwh [OPTIONS] COMMAND [ARGS]...
 ```
 
 **Options**:
-  --help  Show this message and exit.
+*  `--help  Show this message and exit.`
 
-**Commands**:
-  opa     Validate Scan Results against OPA policy
-  report  Create a Lacework build artifact scan report.
+**Commands**:<br/>
+*  `opa     Validate Scan Results against OPA policy`
+*  `report  Create a Lacework build artifact scan report`
 
 
 
