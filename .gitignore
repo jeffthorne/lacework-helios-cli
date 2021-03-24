@@ -1,0 +1,10 @@
+dist/
+test8.html
+v3.json
+.vscode/
+poetry.lock
+venv/
+.idea/
+test9.html
+__pycache__/
+__pycache__*
