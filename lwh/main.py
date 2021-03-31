@@ -1,4 +1,5 @@
 import json
+import subprocess
 import sys
 import requests
 import typer
@@ -33,7 +34,7 @@ def opa(url: str = typer.Option(..., help="URL to OPA server"),
         output: str = typer.Option(".", help="[optional] path to store html report."),
         template: str = typer.Option(None, help="[optional] path to custom html template")):
     """
-       Validate Scan Results agains OPA policy
+       Validate Scan Results against OPA policy
    """
     try:
 

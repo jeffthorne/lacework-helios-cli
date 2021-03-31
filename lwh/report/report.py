@@ -68,17 +68,26 @@ template_string: str = """
             Scan Time:  {{ data['last_evaluation_time']}}<br/><br/>
         
         {% if result != None %}
-        <div style="font-size: 18px; font-weight: bold;">Scan Result: <span class="{{result['result']}}">{{ result['result']}}</span><br/>Reason:</div>
+        <hr/>
+        <div>
+        <div style="display: inline-block; margin-top: 25px;">
+        <div style=";font-size: 18px; font-weight: bold;">Scan Result: <span class="{{result['result']}}">{{ result['result']}}</span><br/>Reason:</div>
         
             {% for r in result['reason']%}
             <div>{{r}}</div>
             {% endfor %}
+            </div>
+            <div style="display: inline-block; vertical-align: top; margin-left: 70px; margin-top:20px; margin-bottom:15px;"><img src="https://d33wubrfki0l68.cloudfront.net/5305a470ca0260247560b4f94daf68ed62d4a514/85ceb/img/logos/opa-no-text-color.png" height="100px" width="100px"/></div>
+            <hr/>
         {% endif %}
+        
+    
+
         
         </div> <!-- end col -->
     </div><!-- end row -->
 
-    <div class="row" style="margin-top: 50px;">
+    <div class="row" style="margin-top: 25px;">
         <div class="col-md-7">
             <h5>Image Details</h5>
 
